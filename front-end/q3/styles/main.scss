@@ -1,15 +1,12 @@
-@import './styles/normalize.scss';
-@import './styles/base.scss';
+@import 'base/reset';
+@import 'base/variables.scss';
+@import 'base/mixins.scss';
+@import 'base/typography';
 
-@import 'styles/variables.scss';
+@import 'components/container';
 
 body {
     background: $beige;
-}
-
-.container {
-    margin: 0 auto;
-    max-width: 1024px;
 }
 
 .top-actions {
@@ -17,7 +14,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 1rem 2rem;
+        padding: 1rem 1rem;
     }
 
     .top-logo {
@@ -31,20 +28,44 @@ body {
         border-radius: 5px;
     }
 
-    .top-menu ul{
-        display: flex;
-        padding: 0;
-        margin: 0;
-        list-style: none;
+    .top-menu {    
+        display: none;
+        ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style: none;
 
-        li {
-            padding: 0.75rem 1rem;
-            border-radius: 5px;
+            li {
+                padding: 0.75rem 1rem;
+                border-radius: 5px;
 
-            &.active {
-                background: $primary;
-                color: white;
+                &.active {
+                    background: $primary;
+                    color: white;
+                }
             }
+        }
+    }
+
+    button {
+        svg {
+            height: 1.5rem;
+            width: 1.5rem;
+            fill: currentColor;
+        }
+    }
+    @include small-breakpoint {
+        .top-menu {
+            display: block;
+        }
+        button {
+            display: none;
+        }
+    }
+    @include medium-breakpoint {
+        .container {
+            padding: 1rem 2rem;
         }
     }
 }
@@ -69,6 +90,7 @@ body {
     background: $beige;
     padding: 1.5rem;
     display: flex;
+    flex-direction: column;
 
     .recommended {
         position: absolute;
@@ -81,6 +103,8 @@ body {
     }
 
     img {
+        max-height: 300px;
+        margin: 0 auto;
         border-radius: 10px;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
@@ -90,8 +114,17 @@ body {
     }
 
     h2 {
-        margin: 0;
-        margin-bottom: 0.25rem;
+        margin: 1rem 0 0.25rem;
+    }
+
+    @include medium-breakpoint {
+        flex-direction: row;
+        img {
+            max-height: 500px;
+        }
+        h2 {
+            margin: 0 0 0.25rem;
+        }
     }
 }
 
@@ -101,15 +134,15 @@ body {
 
     .books-list {
         display: flex;
+        flex-direction: column;
 
         .book {
             position: relative;
             background: $beige;
-            width: 33%;
             padding: 1rem;
 
-            &:not(:nth-child(3n + 1)) {
-                margin-left: 1rem;
+            &:not(:last-child) {
+                margin-bottom: 1rem;
             }
             
             .position {
@@ -126,7 +159,7 @@ body {
                 border-radius: 100%;
                 border: 2px solid $yellow;
             }
-
+            
             img {
                 display: block;
                 margin: 0 auto;
@@ -134,13 +167,23 @@ body {
                 border-radius: 10px;
                 box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             }
-
+            
             h3 {
                 font-size: 1rem;
                 margin-bottom: 0.25em;
             }
         }
-
+        
+        @include large-breakpoint {
+            flex-direction: row;
+            
+            .book {
+                width: 33%;
+                &:not(:nth-child(3n + 1)) {
+                    margin-left: 1rem;
+                }
+            }
+        }
     }
 }
 
@@ -160,6 +203,11 @@ footer {
         justify-content: center;
         align-items: center;
 
+    }
+    li {
+        padding: 1rem 1rem;
+    }
+    @include small-breakpoint {
         li {
             padding: 1rem 2rem;
         }

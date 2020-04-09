@@ -1,0 +1,17 @@
+@import '../base/variables';
+@import '../base/mixins';
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    
+    @include small-breakpoint {
+        max-width: $mobile;
+    }
+    @include medium-breakpoint {
+        max-width: $tablet;
+    }
+    @include large-breakpoint {
+        max-width: $desktop;
+    }
+}
