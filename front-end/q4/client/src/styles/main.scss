@@ -1,0 +1,24 @@
+@import 'base/reset';
+@import 'base/variables.scss';
+@import 'base/mixins.scss';
+@import 'base/typography';
+
+@import 'components/container';
+@import 'components/button';
+
+body {
+    background: $beige;
+    font-size: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: $yellow;
+    
+    &:hover {
+        text-decoration: underline;
+    }
+    &:focus {
+        outline: 3px dashed currentColor;
+    }
+}

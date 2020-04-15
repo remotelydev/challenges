@@ -7,6 +7,7 @@ import routes from './routes';
 
 const server = new Hapi.Server({
   port: 3000,
+  host: 'localhost',
   routes: { cors: true },
 });
 
@@ -16,6 +17,8 @@ const startServer = async() => {
   routes.forEach((route) => {
     server.route(route);
   });
+
+  
 
   try {
     await server.start();
