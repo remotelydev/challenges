@@ -1,6 +1,6 @@
 <template>
   <div class="books container">
-    <router-link to="/books">
+    <router-link to="/books" data-cy="header">
       <h1>Top books of all time</h1>
     </router-link>
 
@@ -10,7 +10,7 @@
       *  Especially if we'd use Vuex store for data.
       *  I'm not sure if that's what you meant by text search, but I did my best guess.
     -->
-    <div class="search">
+    <div class="search" data-cy="search">
       <form @submit.prevent="search()">
         <input type="text" v-model="searchTerm" />
         <button class="button" type="submit">Search</button>
@@ -25,7 +25,12 @@
       *  Just until it would be used anywhere else I woudn't extract it.
       *  Especially if we'd use Vuex store for data.
     -->
-    <div class="book" v-for="book in paginatedBooks" :key="book.slug">
+    <div
+      class="book"
+      v-for="book in paginatedBooks"
+      :key="book.slug"
+      data-cy="book"
+    >
       <div class="book-description">
         <div class="book-title">
           <h2>
@@ -41,12 +46,13 @@
         <div class="votes">
           <button
             class="button"
-            :class="{ upvoted: book.upvoted }"
+            :class="{ reversed: book.upvoted }"
             @click="toggleVote(book.rank)"
+            data-cy="upvote"
           >
             {{ book.upvoted ? "Upvoted" : "Upvote" }}
           </button>
-          <span>Upvoted {{ book.upvotes }} times</span>
+          <span data-cy="upvote-count">Upvoted {{ book.upvotes }} times</span>
         </div>
       </div>
       <router-link :to="`/books/${book.slug}`">
@@ -58,7 +64,7 @@
       ** I could extract pagination to a separate component, 
       *  although it's not used anywhere else in this project and until then I wouldn't do it.
     -->
-    <div v-if="pages > 1" class="pagination">
+    <div v-if="pages > 1" class="pagination" data-cy="pagination">
       <router-link
         v-for="i in pages"
         :key="`page-${i}`"

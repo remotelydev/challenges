@@ -1,7 +1,7 @@
 <template>
-  <section>
+  <section data-cy="comments">
     <h2>Comments</h2>
-    <p v-if="!comments.length">
+    <p v-if="!comments.length" data-cy="no-comments">
       There are no comments yet. You can write one below.
     </p>
     <div v-else>
@@ -9,6 +9,7 @@
         class="comment"
         v-for="(comment, i) in comments"
         :key="`comment-${i}`"
+        data-cy="comment"
       >
         <h4>{{ comment.name }}</h4>
         <p>{{ comment.text }}</p>
@@ -21,16 +22,20 @@
         placeholder="Name"
         v-model="newComment.name"
         required
+        data-cy="input-name"
       />
       <textarea
-        name="coment"
-        id="coment"
+        name="comment"
+        id="comment"
         rows="4"
         placeholder="Comment"
         v-model="newComment.text"
         required
+        data-cy="input-comment"
       ></textarea>
-      <button class="button" type="submit">Add comment</button>
+      <button class="button" type="submit" data-cy="add-comment">
+        Add comment
+      </button>
     </form>
   </section>
 </template>

@@ -1,16 +1,17 @@
 <template>
   <div v-if="book" class="book-details container">
-    <header>
+    <header data-cy="header">
       <div>
         <h1>{{ book.title }}</h1>
         <span class="author">{{ book.author }}</span>
       </div>
       <div class="votes">
-        <span>Upvoted {{ book.upvotes }} times</span>
+        <span data-cy="upvote-count">Upvoted {{ book.upvotes }} times</span>
         <button
           class="button"
           :class="book.upvoted ? 'reversed' : ''"
           @click="toggleVote()"
+          data-cy="upvote"
         >
           {{ book.upvoted ? "Upvoted" : "Upvote" }}
         </button>
@@ -49,6 +50,7 @@ export default {
       })
       .catch(err => {
         //not sure why the 404 is not catched. I guess it's a server thing
+        //eslint-disable-next-line no-console
         console.error(`Error: ${err.message}`);
       });
   },
